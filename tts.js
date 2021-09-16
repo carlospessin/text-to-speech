@@ -58,11 +58,11 @@ function stop() {
     play.classList.remove('hidden');
 }
 
- function reload() {
-    let r = setInterval(() => {
-        console.log('reload');
+var r;
+function reload() {
+    r = setInterval(() => {
         clearInterval(r);
-        
+
         window.speechSynthesis.pause();
         window.speechSynthesis.resume();
 
@@ -70,6 +70,11 @@ function stop() {
     }, 13000);
 }
 
-speech.onend = function() { 
+speech.onend = function () {
     stop();
 };
+
+window.onbeforeunload = function () {
+    clearInterval(r);
+    stop();
+}
