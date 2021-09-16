@@ -46,8 +46,7 @@ document.querySelector("#resume").addEventListener("click", () => {
     pause.classList.remove('hidden');
 });
 
-// STOP
-document.querySelector("#stop").addEventListener("click", () => {
+function stop() {
     play = document.querySelector("#play")
     pause = document.querySelector("#pause")
     resume = document.querySelector("#resume")
@@ -57,12 +56,10 @@ document.querySelector("#stop").addEventListener("click", () => {
     pause.classList.add('hidden');
     resume.classList.add('hidden');
     play.classList.remove('hidden');
-});
-
+}
 
  function reload() {
     let r = setInterval(() => {
-
         console.log('reload');
         clearInterval(r);
         
@@ -70,16 +67,9 @@ document.querySelector("#stop").addEventListener("click", () => {
         window.speechSynthesis.resume();
 
         reload();
-        
     }, 13000);
 }
 
 speech.onend = function() { 
-    play = document.querySelector("#play")
-    pause = document.querySelector("#pause")
-    resume = document.querySelector("#resume")
-
-    pause.classList.add('hidden');
-    resume.classList.add('hidden');
-    play.classList.remove('hidden');
- };
+    stop();
+};
