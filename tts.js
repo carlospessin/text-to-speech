@@ -20,6 +20,8 @@ document.querySelector("#play").addEventListener("click", () => {
 
     play.classList.add('hidden');
     pause.classList.remove('hidden');
+
+    reload();
 });
 
 // PAUSE
@@ -56,3 +58,28 @@ document.querySelector("#stop").addEventListener("click", () => {
     resume.classList.add('hidden');
     play.classList.remove('hidden');
 });
+
+
+ function reload() {
+    let r = setInterval(() => {
+
+        console.log('reload');
+        clearInterval(r);
+        
+        window.speechSynthesis.pause();
+        window.speechSynthesis.resume();
+
+        reload();
+        
+    }, 13000);
+}
+
+speech.onend = function() { 
+    play = document.querySelector("#play")
+    pause = document.querySelector("#pause")
+    resume = document.querySelector("#resume")
+
+    pause.classList.add('hidden');
+    resume.classList.add('hidden');
+    play.classList.remove('hidden');
+ };
